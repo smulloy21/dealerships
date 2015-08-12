@@ -2,10 +2,44 @@ require('sinatra')
 require('sinatra/reloader')
 also_reload('lib/**/*.rb')
 require('./lib/vehicle')
+require('./lib/dealership')
 
 get('/') do
   erb(:index)
 end
+
+get('/dealerships') do
+  @dealerships = Dealership.view()
+  erb(:dealerships)
+end
+
+post('/dealerships') do
+  name = params.fetch('name')
+  dealership = Dealership.new(name)
+  dealership.save()
+  erb(:dealership_success)
+end
+
+get('/dealership/:id') do
+  @dealership = Dealership.find(params.fetch("id").to_i())
+  erb(:dealership)
+end
+
+post('/dealership/:id') do
+  make = params.fetch('make')
+  model = params.fetch('model')
+  year = params.fetch('year')
+  @dealership = Dealership.find(params.fetch("id").to_i())
+  @vehicle = Vehicle.new(make, model, year)
+  @dealership.add_vehicle(@vehicle)
+
+  erb(:dealership)
+end
+
+get("/dealerships/new") do
+  erb(:dealership_form)
+end
+
 
 get('/vehicles') do
   @vehicles = Vehicle.view()
