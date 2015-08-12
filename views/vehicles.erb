@@ -2,9 +2,15 @@
 
 <ul>
   <% @vehicles.each() do |vehicle| %>
-    <li><a href='/vehicles/<%= vehicle.id() %>'><%= vehicle.make() %>, <%=  vehicle.model() %>, <=% vehicle.year() %></a></li>
+    <li><a href='/vehicles/<%= vehicle.id() %>'><%= vehicle.make() %> <%=  vehicle.model() %>, <%= vehicle.year() %></a></li>
   <% end %>
 
 
 
 </ul>
+
+<p></p>
+
+<a href="/vehicles/new">Add Another Vehicle</a>
+<p></p>
+<a href="/">Home</a>
