@@ -1,0 +1,10 @@
+<h3>Here is a list of the vehicles added</h3>
+
+<ul>
+  <% @vehicles.each() do |vehicle| %>
+    <li><a href='/vehicles/<%= vehicle.id() %>'><%= vehicle.make() %>, <%=  vehicle.model() %>, <=% vehicle.year() %></a></li>
+  <% end %>
+
+
+
+</ul>
